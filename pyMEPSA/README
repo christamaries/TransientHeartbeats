@@ -1,0 +1,69 @@
+Program Name: MEPSA (multi-excess peak search algorithm)
+Author: Cristiano Guidorzi @ University of Ferrara, Italy
+Version: 1.0
+Date: October 2014
+
+1) PURPOSE
+------------------
+Search an input time series for peaks.
+Input time series is supposed to be background-subtracted (or just detrended),
+evenly spaced, affected by uncorrelated Gaussian noise.
+
+
+
+2) INSTALL
+------------------
+Unpack the tgz file in your home directory, or wherever
+you want:
+
+tar zxvf MEPSA.tgz
+
+It creates a directory called "MEPSA".
+Enter the MEPSA directory.
+The program language is plain C code and its compilation
+is straightforward:
+
+cc -o mepsa.exe mepsa.c -lm
+
+At this point you should store the executable in a directory
+included in your PATH.
+
+
+
+3) EXCESS PATTERNS MASK FILE
+-------------------------
+file name: excess_pattern_MEPSA_v0.dat
+
+The excess patterns' mask file should not be modified unless
+one aims at optimising the code to one's own need (in which
+case we recommend a preliminary thorough testing before trusting
+the results.
+
+
+
+4) TEST
+------------------
+An input light curve is provided in the MEPSA/test/ directory.
+To make sure the executable yields correct results, we provide
+an example.
+
+mepsa.exe input_lc.dat ~/MEPSA/excess_pattern_MEPSA_v0.dat 256 > mepsa.out
+
+Make sure the output content, saved to 'mepsa.out' in the command
+line above, is the same as that in file 'output.mepsa.out'.
+
+
+
+5) USAGE
+------------------
+3 arguments are required:
+   1. input time series (3 columns: time, rate, error on rate)
+   2. excess patterns' file
+   3. maximum rebin factor to be searched
+
+Argument 2 is provided together with the present C code.
+This could be changed by users themselves according to their need. In this
+case, we recommend preliminary thorough testing before trusting the results.
+Example:
+
+mepsa.exe input_lc.dat ~/MEPSA/excess_pattern_MEPSA_v0.dat 512 > mepsa.out
